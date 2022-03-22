@@ -1,15 +1,22 @@
 # Kutai NFT Generator
-Kutai NFT Generator is a Random Generative Engine for creating a random generative artworks/collections using Python code. This project idea inspired by [Hashlips Art Engine](https://github.com/HashLips/hashlips_art_engine.git). This project are trying to solve/add more feature that are not exist in Hashlips Art Engine. I may add more  function/script like "rule" that has logic in it that able to exclude some attributes for being choose.  
+Kutai NFT Generator is a Random Generative Engine for creating random generative artworks/collections using Python code. This project idea was inspired by Hashlips Art Engine. This project is trying to solve/add more features that do not exist in Hashlips Art Engine. I may add more functions/scripts like "rule" that have logic in it that is able to exclude some attributes for being chosen.  
 
-Anyway, what I'm trying to do is to make it as simple as possible, so the users with no programming background also able to use it.
+Anyway, what I'm trying to do is to make it as simple as possible, so users with no programming background are able to use it.
 
-Ok, this is what I'm trying to do on this first version:
-* Produce some random combination based on artworks input
-* Apply the rule/logic
-* Make it easy to debug (optional)
+## How to use it?
+You can try it by running [test.py](test.py).
+```terminal
+python test.py
+```
+or you also can try by custom the project folder by typing
+```terminal
+python manage.py generate <n-output> <output-destination>
+```
+It will create a source folder including attributes.json, config.json, probability.json, and source.svg file. Make sure the layers folder is not empty.
 
-Requirements:
----
-* Layers
-* Probability/Percentage
-* Logic (optional)
+All png files in the layers folder be should be written in `index_trait-type_trait-name.png` format. Underscore ("_") character will be the delimiter as it is being read by the scripts/functions.
+
+## Make sure you install all the requirements
+```terminal
+pip install -r requirements.txt
+```
