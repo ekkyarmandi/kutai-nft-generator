@@ -8,13 +8,13 @@ You can try it by running [test.py](test.py).
 ```terminal
 python test.py
 ```
-or you also can try by custom the project folder by typing
+or you can try to create custom folder by executing the command line below
 ```terminal
 python manage.py generate <n-output> <output-destination>
 ```
-It will create a source folder including attributes.json, config.json, probability.json, and source.svg file. Make sure the layers folder is not empty.
+It will create a source folder including attributes.json, config.json, probability.json, and source.svg files in it. _Make sure the layers folder is not empty_.
 
-All png files in the layers folder be should be written in `index_trait-type_trait-name.png` format. Underscore ("_") character will be the delimiter as it is being read by the scripts/functions.
+All png files in the layers folder should be written in `index_trait-type_trait-name.png` format. Underscore ("\_") character will be the delimiter as it is being read by the scripts/functions.
 
 ## Make sure you install all the requirements
 ```terminal
