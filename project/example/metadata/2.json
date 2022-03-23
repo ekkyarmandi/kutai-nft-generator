@@ -1,0 +1,28 @@
+{
+    "name": "Project Name #2",
+    "description": "Project Description.",
+    "image": "2.png",
+    "attributes": [
+        {
+            "trait_type": "Background",
+            "value": "Rainbow"
+        },
+        {
+            "trait_type": "Body",
+            "value": "Chocolate"
+        },
+        {
+            "trait_type": "Headgear",
+            "value": "Green Cap"
+        },
+        {
+            "trait_type": "Expression",
+            "value": "Hororr"
+        },
+        {
+            "trait_type": "Pot",
+            "value": "Wood"
+        }
+    ],
+    "compiler": "Kutai NFT Generator"
+}

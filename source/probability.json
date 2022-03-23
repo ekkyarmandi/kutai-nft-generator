@@ -1,0 +1,62 @@
+{
+    "Background": {
+        "Dull": 1.0,
+        "Garden": 1.0,
+        "Nature": 1.0,
+        "Ocean": 1.0,
+        "Rainbow": 1.0,
+        "Road": 1.0,
+        "Sahara": 1.0,
+        "Sunny": 1.0,
+        "Violet": 1.0
+    },
+    "Body": {
+        "Black": 1.0,
+        "Chocolate": 1.0,
+        "Circle": 1.0,
+        "Dotted": 1.0,
+        "Green Line": 1.0,
+        "Green": 1.0,
+        "Light Blue": 1.0,
+        "Orange": 1.0,
+        "Original": 1.0,
+        "Tiger": 1.0,
+        "Yellow": 1.0
+    },
+    "Headgear": {
+        "Bandana": 1.0,
+        "Cowboy": 1.0,
+        "Crown": 1.0,
+        "Green Cap": 1.0,
+        "Headphone": 1.0,
+        "Helicaptor": 1.0,
+        "Helmet": 1.0,
+        "Party Cap": 1.0,
+        "Turban": 1.0,
+        "Winter Cap": 1.0
+    },
+    "Expression": {
+        "Angry": 1.0,
+        "Child": 1.0,
+        "Chill": 1.0,
+        "Crazy": 1.0,
+        "Evil": 1.0,
+        "Happy": 1.0,
+        "Hororr": 1.0,
+        "Joker": 1.0,
+        "Lazy": 1.0
+    },
+    "Pot": {
+        "Antique": 1.0,
+        "Barrel Pot": 1.0,
+        "Bucket": 1.0,
+        "Hexagon": 1.0,
+        "Modern Pot": 1.0,
+        "Parade Pot": 1.0,
+        "Porcelain": 1.0,
+        "Tree": 1.0,
+        "Vase": 1.0,
+        "Vector": 1.0,
+        "Wood": 1.0
+    }
+}

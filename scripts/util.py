@@ -25,7 +25,8 @@ def create_metadata(metadata, output_path):
             "name": " ".join([project_name,"#"+str(i+1)]),
             "description": description,
             "image": str(i+1) + ".png",
-            "attributes": []
+            "attributes": [],
+            "compiler": "Kutai NFT Generator"
         }
         for trait_type,value in m.items():
             if value != "None":

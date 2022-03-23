@@ -1,0 +1,62 @@
+{
+    "Background": [
+        "Dull",
+        "Garden",
+        "Nature",
+        "Ocean",
+        "Rainbow",
+        "Road",
+        "Sahara",
+        "Sunny",
+        "Violet"
+    ],
+    "Body": [
+        "Black",
+        "Chocolate",
+        "Circle",
+        "Dotted",
+        "Green Line",
+        "Green",
+        "Light Blue",
+        "Orange",
+        "Original",
+        "Tiger",
+        "Yellow"
+    ],
+    "Headgear": [
+        "Bandana",
+        "Cowboy",
+        "Crown",
+        "Green Cap",
+        "Headphone",
+        "Helicaptor",
+        "Helmet",
+        "Party Cap",
+        "Turban",
+        "Winter Cap"
+    ],
+    "Expression": [
+        "Angry",
+        "Child",
+        "Chill",
+        "Crazy",
+        "Evil",
+        "Happy",
+        "Hororr",
+        "Joker",
+        "Lazy"
+    ],
+    "Pot": [
+        "Antique",
+        "Barrel Pot",
+        "Bucket",
+        "Hexagon",
+        "Modern Pot",
+        "Parade Pot",
+        "Porcelain",
+        "Tree",
+        "Vase",
+        "Vector",
+        "Wood"
+    ]
+}

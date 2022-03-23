@@ -1,0 +1,28 @@
+{
+    "name": "Project Name #9",
+    "description": "Project Description.",
+    "image": "9.png",
+    "attributes": [
+        {
+            "trait_type": "Background",
+            "value": "Ocean"
+        },
+        {
+            "trait_type": "Body",
+            "value": "Tiger"
+        },
+        {
+            "trait_type": "Headgear",
+            "value": "Headphone"
+        },
+        {
+            "trait_type": "Expression",
+            "value": "Crazy"
+        },
+        {
+            "trait_type": "Pot",
+            "value": "Modern Pot"
+        }
+    ],
+    "compiler": "Kutai NFT Generator"
+}

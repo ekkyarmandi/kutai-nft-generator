@@ -1,0 +1,282 @@
+[
+    {
+        "name": "Project Name #1",
+        "description": "Project Description.",
+        "image": "1.png",
+        "attributes": [
+            {
+                "trait_type": "Background",
+                "value": "Ocean"
+            },
+            {
+                "trait_type": "Body",
+                "value": "Green Line"
+            },
+            {
+                "trait_type": "Headgear",
+                "value": "Bandana"
+            },
+            {
+                "trait_type": "Expression",
+                "value": "Lazy"
+            },
+            {
+                "trait_type": "Pot",
+                "value": "Porcelain"
+            }
+        ],
+        "compiler": "Kutai NFT Generator"
+    },
+    {
+        "name": "Project Name #2",
+        "description": "Project Description.",
+        "image": "2.png",
+        "attributes": [
+            {
+                "trait_type": "Background",
+                "value": "Rainbow"
+            },
+            {
+                "trait_type": "Body",
+                "value": "Chocolate"
+            },
+            {
+                "trait_type": "Headgear",
+                "value": "Green Cap"
+            },
+            {
+                "trait_type": "Expression",
+                "value": "Hororr"
+            },
+            {
+                "trait_type": "Pot",
+                "value": "Wood"
+            }
+        ],
+        "compiler": "Kutai NFT Generator"
+    },
+    {
+        "name": "Project Name #3",
+        "description": "Project Description.",
+        "image": "3.png",
+        "attributes": [
+            {
+                "trait_type": "Background",
+                "value": "Dull"
+            },
+            {
+                "trait_type": "Body",
+                "value": "Tiger"
+            },
+            {
+                "trait_type": "Headgear",
+                "value": "Party Cap"
+            },
+            {
+                "trait_type": "Expression",
+                "value": "Hororr"
+            },
+            {
+                "trait_type": "Pot",
+                "value": "Barrel Pot"
+            }
+        ],
+        "compiler": "Kutai NFT Generator"
+    },
+    {
+        "name": "Project Name #4",
+        "description": "Project Description.",
+        "image": "4.png",
+        "attributes": [
+            {
+                "trait_type": "Background",
+                "value": "Garden"
+            },
+            {
+                "trait_type": "Body",
+                "value": "Green"
+            },
+            {
+                "trait_type": "Headgear",
+                "value": "Cowboy"
+            },
+            {
+                "trait_type": "Expression",
+                "value": "Chill"
+            },
+            {
+                "trait_type": "Pot",
+                "value": "Parade Pot"
+            }
+        ],
+        "compiler": "Kutai NFT Generator"
+    },
+    {
+        "name": "Project Name #5",
+        "description": "Project Description.",
+        "image": "5.png",
+        "attributes": [
+            {
+                "trait_type": "Background",
+                "value": "Sunny"
+            },
+            {
+                "trait_type": "Body",
+                "value": "Yellow"
+            },
+            {
+                "trait_type": "Headgear",
+                "value": "Party Cap"
+            },
+            {
+                "trait_type": "Expression",
+                "value": "Child"
+            },
+            {
+                "trait_type": "Pot",
+                "value": "Wood"
+            }
+        ],
+        "compiler": "Kutai NFT Generator"
+    },
+    {
+        "name": "Project Name #6",
+        "description": "Project Description.",
+        "image": "6.png",
+        "attributes": [
+            {
+                "trait_type": "Background",
+                "value": "Sunny"
+            },
+            {
+                "trait_type": "Body",
+                "value": "Green"
+            },
+            {
+                "trait_type": "Headgear",
+                "value": "Headphone"
+            },
+            {
+                "trait_type": "Expression",
+                "value": "Joker"
+            },
+            {
+                "trait_type": "Pot",
+                "value": "Vase"
+            }
+        ],
+        "compiler": "Kutai NFT Generator"
+    },
+    {
+        "name": "Project Name #7",
+        "description": "Project Description.",
+        "image": "7.png",
+        "attributes": [
+            {
+                "trait_type": "Background",
+                "value": "Nature"
+            },
+            {
+                "trait_type": "Body",
+                "value": "Original"
+            },
+            {
+                "trait_type": "Headgear",
+                "value": "Winter Cap"
+            },
+            {
+                "trait_type": "Expression",
+                "value": "Child"
+            },
+            {
+                "trait_type": "Pot",
+                "value": "Bucket"
+            }
+        ],
+        "compiler": "Kutai NFT Generator"
+    },
+    {
+        "name": "Project Name #8",
+        "description": "Project Description.",
+        "image": "8.png",
+        "attributes": [
+            {
+                "trait_type": "Background",
+                "value": "Sunny"
+            },
+            {
+                "trait_type": "Body",
+                "value": "Yellow"
+            },
+            {
+                "trait_type": "Headgear",
+                "value": "Winter Cap"
+            },
+            {
+                "trait_type": "Expression",
+                "value": "Child"
+            },
+            {
+                "trait_type": "Pot",
+                "value": "Parade Pot"
+            }
+        ],
+        "compiler": "Kutai NFT Generator"
+    },
+    {
+        "name": "Project Name #9",
+        "description": "Project Description.",
+        "image": "9.png",
+        "attributes": [
+            {
+                "trait_type": "Background",
+                "value": "Ocean"
+            },
+            {
+                "trait_type": "Body",
+                "value": "Tiger"
+            },
+            {
+                "trait_type": "Headgear",
+                "value": "Headphone"
+            },
+            {
+                "trait_type": "Expression",
+                "value": "Crazy"
+            },
+            {
+                "trait_type": "Pot",
+                "value": "Modern Pot"
+            }
+        ],
+        "compiler": "Kutai NFT Generator"
+    },
+    {
+        "name": "Project Name #10",
+        "description": "Project Description.",
+        "image": "10.png",
+        "attributes": [
+            {
+                "trait_type": "Background",
+                "value": "Nature"
+            },
+            {
+                "trait_type": "Body",
+                "value": "Yellow"
+            },
+            {
+                "trait_type": "Headgear",
+                "value": "Helicaptor"
+            },
+            {
+                "trait_type": "Expression",
+                "value": "Evil"
+            },
+            {
+                "trait_type": "Pot",
+                "value": "Vector"
+            }
+        ],
+        "compiler": "Kutai NFT Generator"
+    }
+]
