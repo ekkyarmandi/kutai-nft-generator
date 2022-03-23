@@ -1,5 +1,5 @@
 # Kutai NFT Generator
-[:uk: readme](README.md) [:indonesia: baca](BACASAYA.md)
+[:uk: readme](README.md) [:indonesia: baca](BACASAYA.md)  
 Kutai NFT Generator is a Random Generative Engine for creating random generative artworks/collections using Python code. This project idea was inspired by [Hashlips Art Engine](https://github.com/HashLips/hashlips_art_engine). This project is trying to solve/add more features that do not exist in Hashlips Art Engine. I may add more functions/scripts like "rule" that have logic in it that is able to exclude some attributes for being chosen.  
 
 Anyway, what I'm trying to do is to make it as simple as possible, so users with no programming background are able to use it.
