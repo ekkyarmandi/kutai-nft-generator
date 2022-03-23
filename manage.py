@@ -19,7 +19,6 @@ parser.add_argument(
 parser.add_argument(
     "-n", "--number",
     type=int,
-    nargs=1,
     default=10,
     help="Number of generated output"
 )
@@ -48,7 +47,7 @@ parser.add_argument(
 
 args = parser.parse_args()
 
-# if args.command == "merge" and "layers" in args.path:
+# if args.command == "merge" and "layers" not in args.path:
 #     raise argparse.ArgumentError(path, "Path for Merge command should be Layers path")
 
 if args.command == "generate":
@@ -56,9 +55,15 @@ if args.command == "generate":
     project_folder = os.path.join("project",args.path)
     util.check_folder(project_folder)
 
-    generator(number=args.number, output_path=project_folder)
+    generator(
+        number=args.number,
+        output_path=project_folder
+    )
 
 elif args.command == "merge":
     
-    layers_merger(source_path=args.merge_path, size_type=args.size_path)
+    layers_merger(
+        source_path=args.merge_path,
+        size_type=args.size_path
+    )
 

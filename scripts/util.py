@@ -12,6 +12,7 @@ def create_metadata(metadata, output_path):
 
     # create metadata folder
     output_path = os.path.join(output_path,"metadata")
+    check_folder(output_path)
 
     # define the configuration data
     config = json.load(open("source\\config.json"))
