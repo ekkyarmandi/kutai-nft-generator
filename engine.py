@@ -96,6 +96,8 @@ def layers_merger(source_path="layers", size_type="default"):
     create_config(output_path="source\\config.json")
     svg.save(file_path="source\\source.svg")
 
+    print("source\\source.svg has been created.")
+
 def generator(number=10, output_path=None, file_name=""):
     def metadata2list(metadata):
         return [f"{k}_{v}" for k, v in metadata.items() if v != "NOTHING"]
