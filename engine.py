@@ -1,14 +1,17 @@
 from scripts import utils
 from scripts import rule
 
+import time
 import json
 import os
 
-import time
+from PIL import Image
+from tqdm import tqdm
 
 class KutaiEngine:
 
-    attributes = probabilities = {}
+    attributes = {}
+    probabilities = {}
 
     def read_layers(self, project_path):
 
@@ -41,7 +44,7 @@ class KutaiEngine:
             indent=4
         )
 
-        print("attributes.json and probabilities.json has been created.")
+        print("settings\\attributes.json and settings\\probabilities.json has been created")
 
     def update_attributes(self, project_path):
         settings_path = os.path.join("project",project_path,"settings")
@@ -49,16 +52,14 @@ class KutaiEngine:
         self.probabilities = json.load(open(os.path.join(settings_path,"probabilities.json")))
         self.config = json.load(open(os.path.join(settings_path,"config.json")))
 
-    def generate_metadata(self, number, path):
+    def generate_metadata(self, number, project_path, output_path):
 
-        # record the timestamp
-        start = time.time()
-        
         # read all files in settings folder
-        self.update_attributes(path)
+        start = time.time()
+        self.update_attributes(project_path)
 
         # define the output folder
-        project_path = os.path.join("project",path,"output")
+        project_path = os.path.join("project",project_path,"output",output_path)
         utils.check_folder(project_path)
 
         # define the metadata folder
@@ -93,7 +94,7 @@ class KutaiEngine:
         utils.create_metadata(
             self.metadata,
             self.config,
-            path
+            metadata_path
         )
 
         # print out message
@@ -108,6 +109,57 @@ class KutaiEngine:
         )
         return item
 
+    def export(self, project_path, output_path):
+
+        # read config file
+        project_path = os.path.join("project",project_path)
+        config = json.load(open(os.path.join(project_path,"settings","config.json")))
+        self.size = (
+            config['dimension']['width'],
+            config['dimension']['height'],
+        )
+        
+        # read metadata file
+        output_path = os.path.join(project_path,"output",output_path)
+        metadata = json.load(open(os.path.join(output_path,"backup","metadata.json")))
+
+        # read all layers file
+        self.layers = find_layers(os.path.join(project_path,"layers"))
+
+        # merge all images
+        i = 1
+        for model in tqdm(metadata,"Exporting the Images"):
+
+            # merge all the images
+            img = self.model2images(model)
+
+            # save the image
+            file_name = os.path.join(output_path,str(i)+".png")
+            img.save(file_name)
+            i += 1
+
+    def model2images(self, model):
+        
+        # collect images path based on model
+        images = []
+        for m in model:
+            key, value = m, model[m]
+            trait = "_".join([str(key),str(value)])
+            for l in self.layers:
+                if trait in l['attribute_name']:
+                    images.append(l)
+        images_path = sorted(images, key=lambda x: x['sequence'])
+        images_path = [x['path'] for x in images_path]
+        
+        # merge the images
+        for i,p in enumerate(images_path):
+            if i == 0:
+                img = Image.open(p).resize(size=self.size).convert("RGBA")
+            else:
+                top = Image.open(p).resize(size=self.size).convert("RGBA")
+                img = Image.alpha_composite(img,top)
+        
+        return img
 
 def find_images(path):
     images_path = []
@@ -135,8 +187,7 @@ def find_layers(path):
 if __name__ == "__main__":
 
     engine = KutaiEngine()
-    engine.update_attributes("example")
-    engine.generate_metadata(
-        number=10,
-        path="example"
+    engine.export(
+        project_path="example",
+        output_path="sample"
     )

@@ -14,7 +14,8 @@ commands = [
     "startproject",
     "read_layers",
     "update_attributes",
-    "generate"
+    "generate",
+    "export"
 ]
 
 parser.add_argument(
@@ -46,6 +47,13 @@ parser.add_argument(
     help="Project path folder"
 )
 
+parser.add_argument(
+    "-op", "--output-path",
+    type=str,
+    default="project\\example\\output\\sample",
+    help="Output path folder inside your project path"
+)
+
 args = parser.parse_args()
 
 if args.command == "startproject":
@@ -66,15 +74,12 @@ if args.command == "startproject":
 
     # create config file
     config = {
-        "projec_name": "Your project name",
+        "project_name": "Your project name",
         "description": "Your project description",
         "external_url": "https://www.example.com",
         "ipfs_cid": "",
         "filename_prefix": "",
-        "dimension": {
-            "width": 0,
-            "height": 0,
-        }
+        "dimension": {"width": 0, "height": 0}
     }
     json.dump(
         config,
@@ -94,5 +99,12 @@ elif args.command == "update_attributes":
 elif args.command == "generate":
     engine.generate_metadata(
         number=args.number,
-        path=args.path
+        project_path=args.path,
+        output_path=args.output_path
+    )
+
+elif args.command == "export":
+    engine.export(
+        project_path=args.path,
+        output_path=args.output_path
     )
