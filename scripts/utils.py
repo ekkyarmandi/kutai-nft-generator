@@ -8,14 +8,10 @@ def check_folder(path):
     if not os.path.exists(path):
         os.makedirs(path)
 
-def create_metadata(metadata, output_path):
-
-    # create metadata folder
-    output_path = os.path.join(output_path,"metadata")
-    check_folder(output_path)
+def create_metadata(metadata, config, path):
 
     # define the configuration data
-    config = json.load(open("source\\config.json"))
+    project_path = os.path.join("project",path)
     project_name = config['project_name']
     description = config['description']
 
@@ -39,7 +35,7 @@ def create_metadata(metadata, output_path):
         all_metadata.append(model)
         
         # write the individual metadata
-        json.dump(model,open(os.path.join(output_path,str(i+1))+".json","w"),indent=4)
+        json.dump(model,open(os.path.join(project_path,str(i+1))+".json","w"),indent=4)
 
     # write all metadata
-    json.dump(all_metadata,open(os.path.join(output_path,"_metadata.json"),"w"),indent=4)
+    json.dump(all_metadata,open(os.path.join(project_path,"_metadata.json"),"w"),indent=4)
