@@ -8,10 +8,9 @@ def check_folder(path):
     if not os.path.exists(path):
         os.makedirs(path)
 
-def create_metadata(metadata, config, path):
+def create_metadata(metadata, config, project_path):
 
     # define the configuration data
-    project_path = os.path.join("project",path)
     project_name = config['project_name']
     description = config['description']
 
