@@ -1,9 +1,6 @@
 # add local PATH
 import os
 
-gtkhome = "GTK3-Runtime Win64\\bin"
-os.environ["PATH"] = gtkhome + ";" + os.environ["PATH"]
-
 # import necessary libraries
 import cairosvg
 from xml.etree import ElementTree as ET
@@ -158,15 +155,8 @@ def generator(number=10, output_path=None, file_name=""):
 
     # remove the export file
     os.remove("source\\exported.svg")
-    os.remove(metadata_path)
 
 
 if __name__ == "__main__":
 
-    project_folder = os.path.join("project","example")
-    util.check_folder(project_folder)
-
-    metadata_folder = os.path.join(project_folder,"metadata")
-    util.check_folder(metadata_folder)
-
-    generator(output_path=project_folder)
+    pass

@@ -12,7 +12,7 @@ parser = argparse.ArgumentParser(description='Artwork Random Generative Engine')
 parser.add_argument(
     "command",
     type=str,
-    choices=["merge","generate"],
+    choices=["startproject","merge","generate"],
     help="Main command line"
 )
 
@@ -50,20 +50,31 @@ args = parser.parse_args()
 # if args.command == "merge" and "layers" not in args.path:
 #     raise argparse.ArgumentError(path, "Path for Merge command should be Layers path")
 
-if args.command == "generate":
-        
-    project_folder = os.path.join("project",args.path)
-    util.check_folder(project_folder)
+if args.command == "startproject":
+    
+    # create project folder
+    project_path = os.path.join("project",args.path)
+    util.check_folder(project_path)
 
-    generator(
-        number=args.number,
-        output_path=project_folder
-    )
+    # create sub folders
+    sub_folders = [
+        "layers",
+        "output\\backup",
+        "output\\metadata",
+        "source"
+    ]
+    for sub in sub_folders:
+        sub_path = os.path.join(project_path,sub)
+        util.check_folder(sub_path)
+
+    # print out the message
+    print(project_path,"has been created")
+
+elif args.command == "generate":
+        
+    pass
 
 elif args.command == "merge":
     
-    layers_merger(
-        source_path=args.merge_path,
-        size_type=args.size_path
-    )
+    pass
 

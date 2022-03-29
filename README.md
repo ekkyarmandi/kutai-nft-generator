@@ -1,23 +1,24 @@
-# Kutai NFT Generator
-[:uk: readme](README.md) [:indonesia: baca](BACASAYA.md)  
-Kutai NFT Generator is a Random Generative Engine for creating random generative artworks/collections using Python code. This project idea was inspired by [Hashlips Art Engine](https://github.com/HashLips/hashlips_art_engine). This project is trying to solve/add more features that do not exist in Hashlips Art Engine. I may add more functions/scripts like "rule" that have logic in it that is able to exclude some attributes for being chosen.  
+## Kutai NFT Generator
 
-Anyway, what I'm trying to do is to make it as simple as possible, so users with no programming background are able to use it.
+Kutai NFT Generator adalah Random Artworks/Collection Generator yang saya kembangkan menggunakan bahasa pemrograman Python. Project ini sendiri terinspirasi oleh Hashlips Artwork Engine. Adapun fungsi utama project ini adalah membantu Artist untuk menciptakan koleksi karya seninya sendiri.  
 
-## How to use it?
-You can try it by running [test.py](test.py).
-```terminal
-python test.py
-```
-or you can try to create custom folder by executing the command line below
-```terminal
-python manage.py generate <n-output> <output-destination
-```
-It will create a source folder including attributes.json, config.json, probability.json, and source.svg files in it. _Make sure the layers folder is not empty_.
+Alasan saya menggunakan bahasa pemrograman Python sebagai bahasa utamanya karena bahasa pemrograman ini lebih ekspresif dan cukup mudah bagi awam untuk menggunakannya. Tujuan akhir dari pengembangan script ini sendiri adalah agar lebih mudah digunakan oleh orang dengan tanpa later belakang koding.
 
-All png files in the layers folder should be written in `index_trait-type_trait-name.png` format. Underscore ("\_") character will be the delimiter as it is being read by the scripts/functions.
+## Cara Menggunakan
+Tahapan penggunaan script ini
+1. Pastikan kamu sudah meng-install Python (intepreter) dikomputer mu. Python bisa didownload di [python.org]().
+2. Install library yang akan digunakan didalam project ini. Library yang dibutuhkan dapat dilihat di [requirements.txt](requirements.txt). Kamu bisa menggunakan perintah dibawah ini untuk menginstall seluruh modul yang akan digunakan. 
+    ```terminal
+    pip install -r requirements.txt
+    ```
+3. Setelah itu kamu bisa membuat sebuah project directory dengan cara mengeksekusi perintah berikut
+    ```terminal
+    python manage.py startproject -p <project-path>
+    ```
+    Perintah diatas akan membuat sebuah folder baru didalam folder *project*. Dengan subfolder berupa *layers*, *settings*, dan *output*.  
 
-## Make sure you install all the requirements
-```terminal
-pip install -r requirements.txt
-```
+    Lebih rinci, folder *layers* adalah tempat dimana kamu akan menempatkan seluruh layers image (traits) didalamnya dengan format nama file *<index>_<trait-type>_<trait-name>.png* sebagai contoh *0_Background_Natural.png*, pastikan juga jenis file gambar yang kamu gunakan berekstensi "`.png`". Sedangkan folder *settings* adalah folder dimana kamu akan menemukan file seperti `attributes.json`, `config.json`, dan `probability.json`.  
+
+    Folder *output* sendiri adalah folder dimana hasil generative kamu akan ditempatkan.
+
+4. pass
