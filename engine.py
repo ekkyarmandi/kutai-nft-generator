@@ -1,142 +1,142 @@
-# import necessary libraries
-# from tqdm import tqdm
-from PIL import Image
+from scripts import utils
+from scripts import rule
+
 import json
 import os
 
-# import local functions
-from scripts import util
-from scripts import rule
+import time
 
-# def layers_merger(source_path="layers", size_type="default"):
+class KutaiEngine:
 
-#     def find_images(path):
-#         images_path = []
-#         for root, _, files in os.walk(path):
-#             for file in files:
-#                 if file.lower().endswith("png"):
-#                     file_path = os.path.join(root,file)
-#                     images_path.append(file_path)
-#         return images_path
+    attributes = probabilities = {}
 
-#     def find_layers(path):
-#         layers = []
-#         images = find_images(path)
-#         for img in images:
-#             file = img.split("\\")[-1]
-#             layer = {
-#                 "sequence": int(file.split("_")[0]),
-#                 "attribute_name": "_".join(file.split("_")[1:]).replace(".png",""),
-#                 "path": img
-#             }
-#             layers.append(layer)
-#         layers = sorted(layers, key=lambda x: x['sequence'])
-#         return layers
-    
-#     output_path = "source"
-#     util.check_folder(output_path)
+    def read_layers(self, project_path):
 
-#     images = find_images(source_path)
-#     layers = find_layers(source_path)
+        # read the layers files
+        layers_path = os.path.join("project",project_path,"layers")
+        settings_path = os.path.join("project",project_path,"settings")
 
-#     if size_type == "default":
+        # create attributes and probabilites files
+        layers = find_layers(layers_path)
+
+        for layer in layers:
+            trait_type = layer['attribute_name'].split("_")[0]
+            value = layer['attribute_name'].split("_")[1]
+            try: self.attributes[trait_type].append(value)
+            except: self.attributes[trait_type] = [value]
+
+        for trait_type in self.attributes:
+            probs = {k:1.0 for k in self.attributes[trait_type]}
+            self.probabilities.update({trait_type: probs})
         
-#         for filepath in images:
-#             img = Image.open(filepath)
-#             default_size = img.width, img.height
-#             break
+        json.dump(
+            self.attributes,
+            open(os.path.join(settings_path,"attributes.json"), "w"),
+            indent=4
+        )
         
-#         svg = NewSVG(size=default_size)
+        json.dump(
+            self.probabilities,
+            open(os.path.join(settings_path,"probabilities.json"), "w"),
+            indent=4
+        )
+
+        print("attributes.json and probabilities.json has been created.")
+
+    def update_attributes(self, project_path):
+        settings_path = os.path.join("project",project_path,"settings")
+        self.attributes = json.load(open(os.path.join(settings_path,"attributes.json")))
+        self.probabilities = json.load(open(os.path.join(settings_path,"probabilities.json")))
+        self.config = json.load(open(os.path.join(settings_path,"config.json")))
+
+    def generate_metadata(self, number, path):
+
+        # record the timestamp
+        start = time.time()
         
-#     elif size_type == "custom":
-        
-#         svg = NewSVG(size=(700,700))
-    
-#     attributes = {}
-#     for index,layer in enumerate(layers):
-#         svg.add_image(index, layer)
+        # read all files in settings folder
+        self.update_attributes(path)
 
-#         trait_type = layer['attribute_name'].split("_")[0]
-#         value = layer['attribute_name'].split("_")[1]
-#         try: attributes[trait_type].append(value)
-#         except: attributes[trait_type] = [value]
+        # define the output folder
+        project_path = os.path.join("project",path,"output")
+        utils.check_folder(project_path)
 
-#     json.dump(attributes,open("source\\attributes.json","w"),indent=4)
+        # define the metadata folder
+        metadata_path = os.path.join(project_path,"metadata")
+        utils.check_folder(metadata_path)
 
-#     probability = {}
-#     for trait_type in attributes:
-#         probs = {k:1.0 for k in attributes[trait_type]}
-#         probability.update({trait_type: probs})
-    
-#     json.dump(probability,open("source\\probability.json","w"),indent=4)
+        # define the backup folder
+        backup_path = os.path.join(project_path,"backup")
+        utils.check_folder(backup_path)
 
-#     create_config(output_path="source\\config.json")
-#     svg.save(file_path="source\\source.svg")
+        # iterate the loop
+        self.metadata, uniques = [], []
+        while len(self.metadata) < int(number):
+            model = {}
+            for key in self.attributes:
+                model.update(
+                    {key: self.choose(key)}
+                )
+            model_string = ",".join(model.values())
+            if model_string not in uniques:
+                self.metadata.append(model)
+                uniques.append(model_string)
 
-#     print("source\\source.svg has been created.")
+        # dump the metadata into backup folder
+        json.dump(
+            self.metadata,
+            open(os.path.join(backup_path,"metadata.json"), "w"),
+            indent=4
+        )
 
-def generator(number=10, output_path=None, file_name=""):
-    def metadata2list(metadata):
-        return [f"{k}_{v}" for k, v in metadata.items() if v != "NOTHING"]
+        # create all metadata
+        utils.create_metadata(
+            self.metadata,
+            self.config,
+            path
+        )
 
-    # read the config file
-    config = json.load(open("source\\config.json"))
+        # print out message
+        end = time.time()
+        print(number,f"metadata has been generated ({end-start:.2f} sec)")
 
-    # define the empty variable
-    uniques = []
-    metadata = []
-    number = int(number) # make sure the number variable is integer
-    while len(metadata) < number:
+    def choose(self, key):
+        item = rule.choose(
+            self.attributes,
+            self.probabilities,
+            key
+        )
+        return item
 
-        # read the attributes file
-        attributes = json.load(open("source\\attributes.json"))
 
-        # random generate the combination
-        instance = {}
-        for trait_type in attributes:
-            item = rule.choose(attributes, trait_type)
-            instance.update({trait_type: item})
+def find_images(path):
+    images_path = []
+    for root, _, files in os.walk(path):
+        for file in files:
+            if file.lower().endswith("png"):
+                file_path = os.path.join(root,file)
+                images_path.append(file_path)
+    return images_path
 
-        # collect the instance
-        instance_str = ",".join(instance.values())
-        if instance_str not in uniques:
-            uniques.append(instance_str)
-            metadata.append(instance)
-
-    # dump the metadata
-    metadata_path = os.path.join(output_path,"metadata.json")
-    json.dump(metadata, open(metadata_path, "w"), indent=4)
-    util.create_metadata(metadata, output_path)
-
-    # # export the artworks based on metadata
-    # i = 0
-    # file_name = os.path.join(output_path, str(file_name) + "{}.png")
-    # for j in tqdm(metadata, desc=f"Rendering {len(metadata)} {config['project_name']}", ncols=100):
-
-    #     # read the svg file
-    #     tree = ET.parse(open("source\\source.svg"))
-    #     root = tree.getroot()
-
-    #     # apply the metadata
-    #     for element in root.iter():
-    #         if element.tag.split("}")[-1] == "g":
-    #             label = element.get("{http://www.inkscape.org/namespaces/inkscape}label")
-    #             if label in metadata2list(j):
-    #                 style = element.get("style")
-    #                 new_style = style.replace("display:none", "display:inline")
-    #                 element.set("style", new_style)
-
-    #     # export the ballz
-    #     tree.write("source\\exported.svg", xml_declaration=True)
-
-    #     # export the svg into png
-    #     cairosvg.svg2png(url="source\\exported.svg", write_to=file_name.format(i+1))
-    #     i += 1
-
-    # # remove the export file
-    # os.remove("source\\exported.svg")
-
+def find_layers(path):
+    layers = []
+    images = find_images(path)
+    for img in images:
+        file = img.split("\\")[-1]
+        layer = {
+            "sequence": int(file.split("_")[0]),
+            "attribute_name": "_".join(file.split("_")[1:]).replace(".png",""),
+            "path": img
+        }
+        layers.append(layer)
+    layers = sorted(layers, key=lambda x: x['sequence'])
+    return layers
 
 if __name__ == "__main__":
 
-    pass
+    engine = KutaiEngine()
+    engine.update_attributes("example")
+    engine.generate_metadata(
+        number=10,
+        path="example"
+    )
