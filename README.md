@@ -2,11 +2,11 @@
 
 Kutai NFT Generator adalah Random Artworks/Collection Generator yang saya kembangkan menggunakan bahasa pemrograman Python. Project ini sendiri terinspirasi oleh Hashlips Artwork Engine. Adapun fungsi utama project ini adalah membantu Artist untuk menciptakan koleksi karya seninya sendiri.  
 
-Alasan saya menggunakan bahasa pemrograman Python sebagai bahasa utamanya karena bahasa pemrograman ini lebih ekspresif dan cukup mudah bagi awam untuk menggunakannya. Tujuan akhir dari pengembangan script ini sendiri adalah agar lebih mudah digunakan oleh orang dengan tanpa later belakang koding.
+Alasan saya menggunakan bahasa pemrograman Python sebagai bahasa utamanya karena bahasa pemrograman ini lebih ekspresif dan cukup mudah bagi awam. Tujuan akhir dari pengembangan script ini sendiri adalah agar lebih mudah digunakan oleh orang dengan tanpa latar belakang koding.
 
 ## Cara Menggunakan
 Tahapan penggunaan script ini
-1. Pastikan kamu sudah meng-install Python (intepreter) dikomputer mu. Python bisa didownload di [python.org]().
+1. Pastikan kamu sudah meng-install Python (intepreter) dikomputer mu. Python bisa didownload di [python.org](https://www.python.org/downloads/).
 2. Install library yang akan digunakan didalam project ini. Library yang dibutuhkan dapat dilihat di [requirements.txt](requirements.txt). Kamu bisa menggunakan perintah dibawah ini untuk menginstall seluruh modul yang akan digunakan. 
     ```terminal
     pip install -r requirements.txt
