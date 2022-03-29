@@ -1,18 +1,17 @@
+import json
 import os
-from random import choices
-import sys
 
 import argparse
 
 from scripts import util
-from engine import layers_merger, generator
+from engine import generator
 
 parser = argparse.ArgumentParser(description='Artwork Random Generative Engine')
 
 parser.add_argument(
     "command",
     type=str,
-    choices=["startproject","merge","generate"],
+    choices=["startproject","generate"],
     help="Main command line"
 )
 
@@ -32,13 +31,6 @@ parser.add_argument(
 )
 
 parser.add_argument(
-    "-mp", "--merge-path",
-    type=str,
-    default="layers",
-    help="Layers path folder"
-)
-
-parser.add_argument(
     "-p", "--path",
     type=str,
     default="project\\example",
@@ -46,9 +38,6 @@ parser.add_argument(
 )
 
 args = parser.parse_args()
-
-# if args.command == "merge" and "layers" not in args.path:
-#     raise argparse.ArgumentError(path, "Path for Merge command should be Layers path")
 
 if args.command == "startproject":
     
@@ -59,13 +48,30 @@ if args.command == "startproject":
     # create sub folders
     sub_folders = [
         "layers",
-        "output\\backup",
-        "output\\metadata",
-        "source"
+        "output",
+        "settings"
     ]
     for sub in sub_folders:
         sub_path = os.path.join(project_path,sub)
         util.check_folder(sub_path)
+
+    # create config file
+    config = {
+        "projec_name": "Your project name",
+        "description": "Your project description",
+        "external_url": "https://www.example.com",
+        "ipfs_cid": "",
+        "filename_prefix": "",
+        "dimension": {
+            "width": 0,
+            "height": 0,
+        }
+    }
+    json.dump(
+        config,
+        open(os.path.join(project_path,"settings\\config.json"), "w"),
+        indent=4
+    )
 
     # print out the message
     print(project_path,"has been created")
@@ -73,8 +79,3 @@ if args.command == "startproject":
 elif args.command == "generate":
         
     pass
-
-elif args.command == "merge":
-    
-    pass
-

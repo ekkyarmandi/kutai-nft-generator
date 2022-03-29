@@ -1,99 +1,79 @@
-# add local PATH
-import os
-
 # import necessary libraries
-import cairosvg
-from xml.etree import ElementTree as ET
-from tqdm import tqdm
+# from tqdm import tqdm
 from PIL import Image
 import json
+import os
 
 # import local functions
 from scripts import util
 from scripts import rule
-from scripts.svgmerger import NewSVG
 
-# exclude the namespace
-ET.register_namespace("", "http://www.w3.org/2000/svg")
+# def layers_merger(source_path="layers", size_type="default"):
 
-def create_config(output_path="source\\config.json"):
-    if not os.path.exists(output_path):
-        config = {
-            "project_name": "Project Name",
-            "description": "Project Description",
-            "dimension":{
-                "width": 700,
-                "height": 700
-            }
-        }
-        json.dump(config,open(output_path,"w"),indent=4)
+#     def find_images(path):
+#         images_path = []
+#         for root, _, files in os.walk(path):
+#             for file in files:
+#                 if file.lower().endswith("png"):
+#                     file_path = os.path.join(root,file)
+#                     images_path.append(file_path)
+#         return images_path
 
-def layers_merger(source_path="layers", size_type="default"):
-
-    def find_images(path):
-        images_path = []
-        for root, _, files in os.walk(path):
-            for file in files:
-                if file.lower().endswith("png"):
-                    file_path = os.path.join(root,file)
-                    images_path.append(file_path)
-        return images_path
-
-    def find_layers(path):
-        layers = []
-        images = find_images(path)
-        for img in images:
-            file = img.split("\\")[-1]
-            layer = {
-                "sequence": int(file.split("_")[0]),
-                "attribute_name": "_".join(file.split("_")[1:]).replace(".png",""),
-                "path": img
-            }
-            layers.append(layer)
-        layers = sorted(layers, key=lambda x: x['sequence'])
-        return layers
+#     def find_layers(path):
+#         layers = []
+#         images = find_images(path)
+#         for img in images:
+#             file = img.split("\\")[-1]
+#             layer = {
+#                 "sequence": int(file.split("_")[0]),
+#                 "attribute_name": "_".join(file.split("_")[1:]).replace(".png",""),
+#                 "path": img
+#             }
+#             layers.append(layer)
+#         layers = sorted(layers, key=lambda x: x['sequence'])
+#         return layers
     
-    output_path = "source"
-    util.check_folder(output_path)
+#     output_path = "source"
+#     util.check_folder(output_path)
 
-    images = find_images(source_path)
-    layers = find_layers(source_path)
+#     images = find_images(source_path)
+#     layers = find_layers(source_path)
 
-    if size_type == "default":
+#     if size_type == "default":
         
-        for filepath in images:
-            img = Image.open(filepath)
-            default_size = img.width, img.height
-            break
+#         for filepath in images:
+#             img = Image.open(filepath)
+#             default_size = img.width, img.height
+#             break
         
-        svg = NewSVG(size=default_size)
+#         svg = NewSVG(size=default_size)
         
-    elif size_type == "custom":
+#     elif size_type == "custom":
         
-        svg = NewSVG(size=(700,700))
+#         svg = NewSVG(size=(700,700))
     
-    attributes = {}
-    for index,layer in enumerate(layers):
-        svg.add_image(index, layer)
+#     attributes = {}
+#     for index,layer in enumerate(layers):
+#         svg.add_image(index, layer)
 
-        trait_type = layer['attribute_name'].split("_")[0]
-        value = layer['attribute_name'].split("_")[1]
-        try: attributes[trait_type].append(value)
-        except: attributes[trait_type] = [value]
+#         trait_type = layer['attribute_name'].split("_")[0]
+#         value = layer['attribute_name'].split("_")[1]
+#         try: attributes[trait_type].append(value)
+#         except: attributes[trait_type] = [value]
 
-    json.dump(attributes,open("source\\attributes.json","w"),indent=4)
+#     json.dump(attributes,open("source\\attributes.json","w"),indent=4)
 
-    probability = {}
-    for trait_type in attributes:
-        probs = {k:1.0 for k in attributes[trait_type]}
-        probability.update({trait_type: probs})
+#     probability = {}
+#     for trait_type in attributes:
+#         probs = {k:1.0 for k in attributes[trait_type]}
+#         probability.update({trait_type: probs})
     
-    json.dump(probability,open("source\\probability.json","w"),indent=4)
+#     json.dump(probability,open("source\\probability.json","w"),indent=4)
 
-    create_config(output_path="source\\config.json")
-    svg.save(file_path="source\\source.svg")
+#     create_config(output_path="source\\config.json")
+#     svg.save(file_path="source\\source.svg")
 
-    print("source\\source.svg has been created.")
+#     print("source\\source.svg has been created.")
 
 def generator(number=10, output_path=None, file_name=""):
     def metadata2list(metadata):
