@@ -3,15 +3,24 @@ import os
 
 import argparse
 
-from scripts import util
-from engine import generator
+from scripts import utils
+from engine import KutaiEngine
+
+engine = KutaiEngine()
 
 parser = argparse.ArgumentParser(description='Artwork Random Generative Engine')
+
+commands = [
+    "startproject",
+    "read_layers",
+    "update_attributes",
+    "generate"
+]
 
 parser.add_argument(
     "command",
     type=str,
-    choices=["startproject","generate"],
+    choices=commands,
     help="Main command line"
 )
 
@@ -43,7 +52,7 @@ if args.command == "startproject":
     
     # create project folder
     project_path = os.path.join("project",args.path)
-    util.check_folder(project_path)
+    utils.check_folder(project_path)
 
     # create sub folders
     sub_folders = [
@@ -53,7 +62,7 @@ if args.command == "startproject":
     ]
     for sub in sub_folders:
         sub_path = os.path.join(project_path,sub)
-        util.check_folder(sub_path)
+        utils.check_folder(sub_path)
 
     # create config file
     config = {
@@ -76,6 +85,14 @@ if args.command == "startproject":
     # print out the message
     print(project_path,"has been created")
 
+elif args.command == "read_layers":
+    engine.read_layers(args.path)
+
+elif args.command == "update_attributes":
+    engine.update_attributes(args.path)
+
 elif args.command == "generate":
-        
-    pass
+    engine.generate_metadata(
+        number=args.number,
+        path=args.path
+    )
