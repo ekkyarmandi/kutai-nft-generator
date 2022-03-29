@@ -108,33 +108,33 @@ def generator(number=10, output_path=None, file_name=""):
     json.dump(metadata, open(metadata_path, "w"), indent=4)
     util.create_metadata(metadata, output_path)
 
-    # export the artworks based on metadata
-    i = 0
-    file_name = os.path.join(output_path, str(file_name) + "{}.png")
-    for j in tqdm(metadata, desc=f"Rendering {len(metadata)} {config['project_name']}", ncols=100):
+    # # export the artworks based on metadata
+    # i = 0
+    # file_name = os.path.join(output_path, str(file_name) + "{}.png")
+    # for j in tqdm(metadata, desc=f"Rendering {len(metadata)} {config['project_name']}", ncols=100):
 
-        # read the svg file
-        tree = ET.parse(open("source\\source.svg"))
-        root = tree.getroot()
+    #     # read the svg file
+    #     tree = ET.parse(open("source\\source.svg"))
+    #     root = tree.getroot()
 
-        # apply the metadata
-        for element in root.iter():
-            if element.tag.split("}")[-1] == "g":
-                label = element.get("{http://www.inkscape.org/namespaces/inkscape}label")
-                if label in metadata2list(j):
-                    style = element.get("style")
-                    new_style = style.replace("display:none", "display:inline")
-                    element.set("style", new_style)
+    #     # apply the metadata
+    #     for element in root.iter():
+    #         if element.tag.split("}")[-1] == "g":
+    #             label = element.get("{http://www.inkscape.org/namespaces/inkscape}label")
+    #             if label in metadata2list(j):
+    #                 style = element.get("style")
+    #                 new_style = style.replace("display:none", "display:inline")
+    #                 element.set("style", new_style)
 
-        # export the ballz
-        tree.write("source\\exported.svg", xml_declaration=True)
+    #     # export the ballz
+    #     tree.write("source\\exported.svg", xml_declaration=True)
 
-        # export the svg into png
-        cairosvg.svg2png(url="source\\exported.svg", write_to=file_name.format(i+1))
-        i += 1
+    #     # export the svg into png
+    #     cairosvg.svg2png(url="source\\exported.svg", write_to=file_name.format(i+1))
+    #     i += 1
 
-    # remove the export file
-    os.remove("source\\exported.svg")
+    # # remove the export file
+    # os.remove("source\\exported.svg")
 
 
 if __name__ == "__main__":
