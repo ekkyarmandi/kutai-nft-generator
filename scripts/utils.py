@@ -1,5 +1,4 @@
 import os
-import re
 import json
 
 def check_folder(path):
@@ -8,7 +7,7 @@ def check_folder(path):
     if not os.path.exists(path):
         os.makedirs(path)
 
-def create_metadata(metadata, config, project_path):
+def create_metadata(metadata, config, metadata_path):
 
     # define the configuration data
     project_name = config['project_name']
@@ -34,7 +33,7 @@ def create_metadata(metadata, config, project_path):
         all_metadata.append(model)
         
         # write the individual metadata
-        json.dump(model,open(os.path.join(project_path,str(i+1))+".json","w"),indent=4)
+        json.dump(model,open(os.path.join(metadata_path,str(i+1))+".json","w"),indent=4)
 
     # write all metadata
-    json.dump(all_metadata,open(os.path.join(project_path,"_metadata.json"),"w"),indent=4)
+    json.dump(all_metadata,open(os.path.join(metadata_path,"_metadata.json"),"w"),indent=4)

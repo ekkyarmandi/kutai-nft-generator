@@ -1,12 +1,10 @@
 from scripts import utils
 from scripts import rule
-
-import time
-import json
-import os
-
 from PIL import Image
 from tqdm import tqdm
+import json
+import time
+import os
 
 class KutaiEngine:
 
@@ -16,8 +14,8 @@ class KutaiEngine:
     def read_layers(self, project_path):
 
         # read the layers files
-        layers_path = os.path.join("project",project_path,"layers")
-        settings_path = os.path.join("project",project_path,"settings")
+        layers_path = os.path.join(project_path,"layers")
+        settings_path = os.path.join(project_path,"settings")
 
         # create attributes and probabilites files
         layers = find_layers(layers_path)
@@ -47,7 +45,7 @@ class KutaiEngine:
         print("settings\\attributes.json and settings\\probabilities.json has been created")
 
     def update_attributes(self, project_path):
-        settings_path = os.path.join("project",project_path,"settings")
+        settings_path = os.path.join(project_path,"settings")
         self.attributes = json.load(open(os.path.join(settings_path,"attributes.json")))
         self.probabilities = json.load(open(os.path.join(settings_path,"probabilities.json")))
         self.config = json.load(open(os.path.join(settings_path,"config.json")))
@@ -59,7 +57,7 @@ class KutaiEngine:
         self.update_attributes(project_path)
 
         # define the output folder
-        project_path = os.path.join("project",project_path,"output",output_path)
+        project_path = os.path.join(project_path,"output",output_path)
         utils.check_folder(project_path)
 
         # define the metadata folder
@@ -112,7 +110,7 @@ class KutaiEngine:
     def export(self, project_path, output_path):
 
         # read config file
-        project_path = os.path.join("project",project_path)
+        project_path = os.path.join(project_path)
         config = json.load(open(os.path.join(project_path,"settings","config.json")))
         self.size = (
             config['dimension']['width'],
@@ -159,7 +157,7 @@ class KutaiEngine:
                 top = Image.open(p).resize(size=self.size).convert("RGBA")
                 img = Image.alpha_composite(img,top)
         
-        return img
+        return img.convert("RGB")
 
 def find_images(path):
     images_path = []

@@ -1,15 +1,19 @@
-import json
-import os
-
-import argparse
-from this import d
-
 from scripts import utils
 from engine import KutaiEngine
+import argparse
+import json
+import os
 
 engine = KutaiEngine()
 
 parser = argparse.ArgumentParser(description='Artwork Random Generative Engine')
+
+parser.set_defaults(
+    startproject=False,
+    read_layers=False,
+    generate=False,
+    export=False
+)
 
 subparser = parser.add_subparsers(title="Main command lines")
 
@@ -20,7 +24,7 @@ starting = subparser.add_parser(
 starting.add_argument(
     "startproject",
     action="store_true",
-    default=False
+    help="Create your project directory"
 )
 starting.add_argument(
     "project_path",
@@ -34,7 +38,7 @@ read = subparser.add_parser(
 read.add_argument(
     "read_layers",
     action="store_true",
-    default=False
+    help="Read layers project directory"
 )
 read.add_argument(
     "-p", "--path",
@@ -50,7 +54,7 @@ generate = subparser.add_parser(
 generate.add_argument(
     "generate",
     action="store_true",
-    default=False
+    help="Generate project metadata"
 )
 generate.add_argument(
     "number",
@@ -59,9 +63,14 @@ generate.add_argument(
     help="Desired output"
 )
 generate.add_argument(
-    "-o","--output",
-    default="output\\example",
-    help="Metadata output destination path"
+    "output",
+    type=str,
+    help="Metadata output path destination"
+)
+generate.add_argument(
+    "-p","--path",
+    default="",
+    help="Project path destination"
 )
 
 export = subparser.add_parser(
@@ -71,12 +80,17 @@ export = subparser.add_parser(
 export.add_argument(
     "export",
     action="store_true",
-    default=False
+    help="Export images based on metadata"
 )
 export.add_argument(
-    "-o","--output",
-    default="output\\example",
-    help="Metadata output destination path"
+    "output",
+    type=str,
+    help="Metadata output path destination"
+)
+export.add_argument(
+    "-p","--path",
+    default="",
+    help="Project path destination"
 )
 
 # parser.add_argument(
@@ -88,8 +102,6 @@ export.add_argument(
 # )
 
 args = parser.parse_args()
-
-print(args)
 
 if args.startproject:
     
@@ -126,7 +138,11 @@ if args.startproject:
     )
 
     # print out the message
-    print(project_path,"has been created")
+    if project_path != "":
+        print(project_path,"has been created")
+        print("cd",project_path,"to work on your project directory")
+    else:
+        print("Your project has been created")
 
 elif args.read_layers:
     engine.read_layers(args.path)
@@ -135,11 +151,11 @@ elif args.generate:
     engine.generate_metadata(
         number=args.number,
         project_path=args.path,
-        output_path=args.output_path
+        output_path=args.output
     )
 
 elif args.export:
     engine.export(
         project_path=args.path,
-        output_path=args.output_path
+        output_path=args.output
     )
